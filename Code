@@ -1,0 +1,51 @@
+/* 
+Reflective Tote Bag
+Pia Eilin Barth
+GDES-3015-001 Wearable Computing, Sensible Wearable 
+OCAD University 
+Created on 21st of March 2017 
+Based on: 
+Single Treshold, Kate Hartmann, Make-Wearable-Electronics/MWE_Ch07_SingleThreshold/MWE_Ch07_SingleThreshold.ino
+*/
+
+// initialize variables
+int lightSensorValue1 = 0;
+int lightSensorValue2 = 0; 
+int lightSensorPin1 = A0; 
+int lightSensorPin2 = A1; 
+int ledPin = 9;
+int threshold1 = 500; 
+int threshold2 = 300;
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  
+  // initialize serial communication: 
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the light sensor pin and store value in a variable: 
+  int lightSensorValue1 = analogRead(lightSensorPin1);
+  int lightSensorValue2 = analogRead(lightSensorPin2);
+
+  // print the light sensor value
+  Serial.print("Light Sensor Value 1: ");
+  Serial.print(lightSensorValue1);
+  Serial.print(", Light Sensor Value 2: ");
+  Serial.print(lightSensorValue2);
+  //new line
+  Serial.println();
+
+  // if the analog value is high enough, turn on the LED:
+  if (lightSensorValue1 < threshold1) {
+    digitalWrite(ledPin, HIGH);
+  } else if (lightSensorValue2 < threshold2) {
+    digitalWrite(ledPin, HIGH);
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+  
+  delay(1);        // delay in between reads for stability
+}
